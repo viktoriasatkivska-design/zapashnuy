@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Запашний — Комплекс відпочинку</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Nunito:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-deep: #1a3a2a;
+    --green-mid: #2d5c3e;
+    --green-soft: #4a8a5f;
+    --green-pale: #8bbf9a;
+    --cream: #f5f0e8;
+    --cream-dark: #ede5d5;
+    --gold: #c8a84b;
+    --gold-light: #e8c96a;
+    --text-dark: #1c2b1e;
+    --text-mid: #3d5244;
+    --text-muted: #7a9485;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(26, 58, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200, 168, 75, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .nav-logo span {
+    font-style: italic;
+    color: var(--white);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold-light); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--green-deep) !important;
+    padding: 0.5rem 1.4rem;
+    border-radius: 2rem;
+    font-weight: 700 !important;
+  }
+
+  .nav-cta:hover { background: var(--gold-light) !important; color: var(--green-deep) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 60%, rgba(77, 138, 95, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(200, 168, 75, 0.08) 0%, transparent 50%),
+      linear-gradient(160deg, #0d2218 0%, #1a3a2a 40%, #2d5c3e 100%);
+  }
+
+  /* Decorative botanical SVG */
+  .hero-botanical {
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 55%;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .hero-botanical-left {
+    position: absolute;
+    left: -3rem;
+    bottom: -5rem;
+    width: 35%;
+    opacity: 0.08;
+    pointer-events: none;
+    transform: scaleX(-1) rotate(-20deg);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 8rem 4rem 5rem;
+    max-width: 680px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(200, 168, 75, 0.15);
+    border: 1px solid rgba(200, 168, 75, 0.4);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1rem;
+    border-radius: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeInDown 0.8s ease both;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 0.8s 0.1s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeInDown 0.8s 0.2s ease both;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    animation: fadeInDown 0.8s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--green-deep);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: all 0.25s;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(200, 168, 75, 0.35);
+  }
+
+  .btn-outline {
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.25s;
+    display: inline-block;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-outline:hover {
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.08);
+  }
+
+  .hero-phone {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.85rem;
+    margin-top: 1.5rem;
+    animation: fadeInDown 0.8s 0.4s ease both;
+  }
+
+  .hero-phone strong {
+    color: rgba(255,255,255,0.9);
+    font-size: 1rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+
+  .hero-scroll::after {
+    content: '';
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+  }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--green-deep);
+    color: var(--white);
+    padding: 2.5rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .intro-stat {
+    text-align: center;
+  }
+
+  .intro-stat .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    display: block;
+  }
+
+  .intro-stat .label {
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.25rem;
+  }
+
+  /* SECTIONS COMMON */
+  section { padding: 6rem 4rem; }
+
+  .section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--green-soft);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--green-deep);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--green-soft);
+  }
+
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 580px;
+    font-weight: 300;
+  }
+
+  /* ABOUT */
+  .about { background: var(--cream); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card-main {
+    background: var(--green-deep);
+    border-radius: 2rem;
+    height: 380px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .about-card-main svg {
+    width: 80%;
+    opacity: 0.3;
+  }
+
+  .about-card-float {
+    position: absolute;
+    bottom: -1.5rem;
+    right: -2rem;
+    background: var(--white);
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(26, 58, 42, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .about-card-float .icon {
+    width: 48px; height: 48px;
+    background: var(--cream);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+  }
+
+  .about-card-float .text strong {
+    display: block;
+    font-weight: 600;
+    color: var(--green-deep);
+    font-size: 0.95rem;
+  }
+
+  .about-card-float .text span {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  .about-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 2rem;
+  }
+
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .about-feature .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .about-feature p {
+    color: var(--text-mid);
+    line-height: 1.6;
+    font-size: 0.97rem;
+  }
+
+  /* SERVICES */
+  .services { background: var(--green-deep); }
+
+  .services .section-title { color: var(--white); }
+  .services .section-tag { color: var(--gold); }
+  .services .section-lead { color: rgba(255,255,255,0.6); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,168,75,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover {
+    background: rgba(255,255,255,0.09);
+    border-color: rgba(200,168,75,0.3);
+    transform: translateY(-4px);
+  }
+
+  .service-card:hover::before { opacity: 1; }
+
+  .service-icon {
+    width: 56px; height: 56px;
+    background: rgba(200,168,75,0.12);
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid rgba(200,168,75,0.2);
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.65;
+  }
+
+  .service-tag {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(200,168,75,0.12);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(200,168,75,0.25);
+  }
+
+  /* GAZEBOS */
+  .gazebos { background: var(--cream-dark); }
+
+  .gazebos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .gazebo-card {
+    background: var(--white);
+    border-radius: 1.5rem;
+    overflow: hidden;
+    border: 1px solid rgba(26,58,42,0.08);
+    transition: all 0.3s;
+  }
+
+  .gazebo-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(26, 58, 42, 0.12);
+  }
+
+  .gazebo-img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gazebo-img-1 { background: linear-gradient(135deg, #c8e6c9, #a5d6a7); }
+  .gazebo-img-2 { background: linear-gradient(135deg, #b2dfdb, #80cbc4); }
+  .gazebo-img-3 { background: linear-gradient(135deg, #dcedc8, #c5e1a5); }
+
+  .gazebo-capacity {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: rgba(26,58,42,0.85);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.75rem;
+    border-radius: 2rem;
+  }
+
+  .gazebo-body { padding: 1.5rem; }
+
+  .gazebo-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--green-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .gazebo-body p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .gazebo-feats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .feat-pill {
+    background: var(--cream);
+    color: var(--text-mid);
+    font-size: 0.72rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 2rem;
+    border: 1px solid var(--cream-dark);
+  }
+
+  /* PRICING */
+  .pricing { background: var(--green-deep); }
+  .pricing .section-title { color: var(--white); }
+  .pricing .section-tag { color: var(--gold); }
+  .pricing .section-lead { color: rgba(255,255,255,0.6); }
+
+  .pricing-seasons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .season-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .season-header {
+    background: rgba(200,168,75,0.15);
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .season-header .season-icon { font-size: 1.3rem; }
+
+  .season-header .season-dates {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.02em;
+  }
+
+  .season-header .season-label {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .season-rows { padding: 0.75rem 0; }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  .price-row:last-child { border-bottom: none; }
+  .price-row:hover { background: rgba(255,255,255,0.03); }
+
+  .price-row .pr-name {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .price-row .pr-cap {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    margin-left: 0.4rem;
+  }
+
+  .price-row .pr-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    white-space: nowrap;
+  }
+
+  .price-row .pr-price span {
+    font-size: 0.72rem;
+    font-family: 'Nunito', sans-serif;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+    margin-left: 0.2rem;
+  }
+
+  .pricing-notes {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .pricing-note {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .pricing-note .note-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .pricing-note p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+  .pricing-note strong { color: rgba(255,255,255,0.8); display: block; margin-bottom: 0.2rem; font-size: 0.83rem; }
+
+  .pricing-deposit {
+    margin-top: 1.5rem;
+    background: rgba(200,168,75,0.08);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 1rem;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .pricing-deposit .dep-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .pricing-deposit p { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .pricing-deposit strong { color: var(--gold-light); }
+
+
+  /* PRICING */
+  .pricing { background: var(--green-deep); }
+  .pricing .section-title { color: var(--white); }
+  .pricing .section-tag { color: var(--gold); }
+  .pricing .section-lead { color: rgba(255,255,255,0.6); }
+
+  .pricing-seasons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .season-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .season-header {
+    background: rgba(200,168,75,0.15);
+    border-bottom: 1px solid rgba(200,168,75,0.2);
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .season-icon { font-size: 1.3rem; }
+  .season-dates { font-size: 0.85rem; font-weight: 700; color: var(--gold-light); letter-spacing: 0.02em; }
+  .season-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.15rem; }
+
+  .season-rows { padding: 0.5rem 0; }
+
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-row:hover { background: rgba(255,255,255,0.03); }
+
+  .pr-name { font-size: 0.88rem; color: rgba(255,255,255,0.75); }
+  .pr-cap { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-left: 0.4rem; }
+  .pr-price { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--gold-light); white-space: nowrap; }
+  .pr-price span { font-size: 0.72rem; font-family: 'Nunito', sans-serif; color: rgba(255,255,255,0.4); font-weight: 400; margin-left: 0.2rem; }
+
+  .pricing-notes {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .pricing-note {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 1rem;
+    padding: 1rem 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .note-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .pricing-note p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.55; }
+  .pricing-note strong { color: rgba(255,255,255,0.8); display: block; margin-bottom: 0.2rem; font-size: 0.83rem; }
+
+  .pricing-deposit {
+    margin-top: 1.5rem;
+    background: rgba(200,168,75,0.08);
+    border: 1px solid rgba(200,168,75,0.25);
+    border-radius: 1rem;
+    padding: 1.1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .dep-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .pricing-deposit p { font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+  .pricing-deposit strong { color: var(--gold-light); }
+
+  /* POOLS */
+  .pools { background: var(--green-mid); }
+
+  .pools .section-title { color: var(--white); }
+  .pools .section-tag { color: var(--gold); }
+  .pools .section-lead { color: rgba(255,255,255,0.65); }
+
+  .pools-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+
+  .pool-card {
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    transition: all 0.3s;
+  }
+
+  .pool-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-4px);
+  }
+
+  .pool-icon {
+    font-size: 3rem;
+    margin-bottom: 1.25rem;
+    display: block;
+  }
+
+  .pool-size {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .pool-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .pool-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+
+  .pool-badge {
+    display: inline-block;
+    margin-top: 1rem;
+    background: rgba(200,168,75,0.15);
+    color: var(--gold-light);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(200,168,75,0.3);
+  }
+
+  /* EVENTS */
+  .events { background: var(--cream); }
+
+  .events-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+    align-items: center;
+  }
+
+  .events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .event-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: var(--white);
+    border-radius: 1rem;
+    border: 1px solid rgba(26,58,42,0.06);
+    transition: all 0.2s;
+    cursor: default;
+  }
+
+  .event-item:hover {
+    border-color: rgba(200,168,75,0.4);
+    box-shadow: 0 4px 16px rgba(26,58,42,0.07);
+  }
+
+  .event-icon {
+    width: 50px; height: 50px;
+    background: var(--cream);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .event-text strong {
+    display: block;
+    color: var(--green-deep);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .event-text span {
+    color: var(--text-muted);
+    font-size: 0.83rem;
+  }
+
+  .events-big-card {
+    background: var(--green-deep);
+    border-radius: 2rem;
+    padding: 3rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .events-big-card::before {
+    content: '';
+    position: absolute;
+    top: -4rem; right: -4rem;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(200,168,75,0.08);
+  }
+
+  .events-big-card .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .events-big-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .events-big-card p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  /* HOW TO GET */
+  .location { background: var(--cream-dark); }
+
+  .location-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 3.5rem;
+    align-items: start;
+  }
+
+  .location-map-placeholder {
+    background: var(--green-deep);
+    border-radius: 2rem;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .location-map-placeholder .map-icon { font-size: 3rem; opacity: 0.6; }
+
+  .location-map-placeholder p {
+    font-size: 0.9rem;
+    opacity: 0.5;
+    text-align: center;
+  }
+
+  .location-map-placeholder a {
+    color: var(--gold-light);
+    font-size: 0.85rem;
+    text-decoration: none;
+    border: 1px solid rgba(200,168,75,0.4);
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    transition: all 0.2s;
+  }
+
+  .location-map-placeholder a:hover {
+    background: rgba(200,168,75,0.1);
+  }
+
+  .location-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .location-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border-radius: 1rem;
+    border: 1px solid rgba(26,58,42,0.06);
+  }
+
+  .location-item .icon {
+    width: 44px; height: 44px;
+    background: var(--green-deep);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .location-item strong {
+    display: block;
+    color: var(--green-deep);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+  }
+
+  .location-item p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  .location-item a {
+    color: var(--green-soft);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--green-deep) 0%, #0d2218 100%);
+    padding: 7rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,168,75,0.07) 0%, transparent 70%);
+  }
+
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .cta-section p {
+    color: rgba(255,255,255,0.55);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-gold-outline {
+    color: var(--gold-light);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.9rem 2.2rem;
+    border-radius: 2rem;
+    text-decoration: none;
+    border: 1px solid rgba(200,168,75,0.4);
+    transition: all 0.25s;
+    display: inline-block;
+  }
+
+  .btn-gold-outline:hover {
+    background: rgba(200,168,75,0.1);
+    border-color: rgba(200,168,75,0.7);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #0a1c12;
+    color: rgba(255,255,255,0.4);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid rgba(200,168,75,0.15);
+  }
+
+  .footer-brand .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    max-width: 260px;
+  }
+
+  .footer-brand .socials {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+
+  .footer-brand .socials a {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+
+  .footer-brand .socials a:hover {
+    border-color: var(--gold);
+    color: var(--gold-light);
+  }
+
+  footer h4 {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    font-weight: 600;
+  }
+
+  footer ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  footer ul li a {
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  footer ul li a:hover { color: var(--gold-light); }
+
+  .footer-bottom {
+    background: #060e09;
+    padding: 1.25rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.3);
+    font-size: 0.78rem;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .hero-content { padding: 7rem 1.5rem 4rem; }
+    .intro-strip { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem; }
+    .about-grid, .events-layout, .location-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .services-grid, .gazebos-grid, .pools-row { grid-template-columns: 1fr; }
+    .pricing-seasons, .pricing-notes { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 2rem; padding: 2.5rem 1.5rem; }
+    .footer-bottom { padding: 1rem 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .cta-section { padding: 5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Запашний <span>resort</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">Про нас</a></li>
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#gazebos">Альтанки</a></li>
+    <li><a href="#pricing">Ціни</a></li>
+    <li><a href="#pools">Басейни</a></li>
+    <li><a href="#location">Як дістатись</a></li>
+    <li><a href="tel:+380960083838" class="nav-cta">Бронювати</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Botanical SVG decorations -->
+  <svg class="hero-botanical" viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M250 580 Q200 400 100 300 Q50 250 80 150 Q110 50 200 20 Q300 -10 350 80 Q400 170 380 280 Q360 380 300 450 Q260 500 250 580Z" fill="white"/>
+    <path d="M250 580 Q290 420 380 330 Q420 280 410 190 Q400 100 320 60 Q240 20 180 90 Q120 160 150 260 Q180 350 240 430 Q255 470 250 580Z" fill="white" opacity="0.5"/>
+    <ellipse cx="180" cy="200" rx="60" ry="40" fill="white" transform="rotate(-30 180 200)" opacity="0.4"/>
+    <ellipse cx="310" cy="180" rx="55" ry="35" fill="white" transform="rotate(20 310 180)" opacity="0.3"/>
+    <ellipse cx="200" cy="350" rx="50" ry="30" fill="white" transform="rotate(-20 200 350)" opacity="0.35"/>
+    <ellipse cx="320" cy="320" rx="45" ry="28" fill="white" transform="rotate(15 320 320)" opacity="0.25"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">Київ · Бортничі</div>
+    <h1 class="hero-title">
+      Місце,<br>де відпочинок
+      <em>запашний</em>
+    </h1>
+    <p class="hero-subtitle">
+      Комплекс відпочинку просто неба — альтанки для великих компаній, підігріті басейни та простір для незабутніх вражень поруч із містом.
+    </p>
+    <div class="hero-actions">
+      <a href="tel:+380960083838" class="btn-primary">Забронювати альтанку</a>
+      <a href="#services" class="btn-outline">Дізнатись більше</a>
+    </div>
+    <div class="hero-phone">
+      <span>Телефон для бронювання:</span>
+      <strong>096&nbsp;008&nbsp;38&nbsp;38</strong>
+    </div>
+  </div>
+  <div class="hero-scroll">scroll</div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-stat">
+    <span class="num">3</span>
+    <span class="label">Альтанки</span>
+  </div>
+  <div class="intro-stat">
+    <span class="num">33К</span>
+    <span class="label">Підписників</span>
+  </div>
+  <div class="intro-stat">
+    <span class="num">3</span>
+    <span class="label">Басейни</span>
+  </div>
+  <div class="intro-stat">
+    <span class="num">Київ</span>
+    <span class="label">Бортничі</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <span class="section-tag reveal">Про комплекс</span>
+  <h2 class="section-title reveal">Природний відпочинок<br><em>у серці Київщини</em></h2>
+  <p class="section-lead reveal">Запашний — це місце, де час зупиняється. Оточені зеленню, ви відпочинете з компанією, родиною чи колегами в атмосфері затишку та природи.</p>
+
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-card-main">
+        <svg viewBox="0 0 300 250" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Simple gazebo illustration -->
+          <rect x="60" y="160" width="180" height="15" rx="4" fill="white"/>
+          <polygon points="150,40 60,120 240,120" fill="white" opacity="0.9"/>
+          <polygon points="150,70 80,130 220,130" fill="white" opacity="0.6"/>
+          <rect x="80" y="130" width="20" height="45" rx="4" fill="white" opacity="0.8"/>
+          <rect x="140" y="130" width="20" height="45" rx="4" fill="white" opacity="0.8"/>
+          <rect x="200" y="130" width="20" height="45" rx="4" fill="white" opacity="0.8"/>
+          <ellipse cx="100" cy="200" rx="25" ry="12" fill="white" opacity="0.2"/>
+          <ellipse cx="200" cy="200" rx="25" ry="12" fill="white" opacity="0.2"/>
+          <!-- trees -->
+          <ellipse cx="30" cy="180" rx="20" ry="30" fill="white" opacity="0.15"/>
+          <ellipse cx="270" cy="175" rx="22" ry="35" fill="white" opacity="0.1"/>
+        </svg>
+        <div class="about-card-float">
+          <div class="icon">🌿</div>
+          <div class="text">
+            <strong>Жива природа</strong>
+            <span>Зелена зона відпочинку</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <p style="color: var(--text-mid); line-height: 1.75; font-size: 1rem; margin-bottom: 1.5rem;">
+        Комплекс "Запашний" розташований у Бортничах — зовсім близько до центру Києва, але вже у природному оточенні. Ідеальне місце для корпоративів, сімейних свят та дружніх зустрічей.
+      </p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="dot"></div>
+          <p>Просторі альтанки на будь-яку компанію — від 10 до 26 осіб, зі зручними місцями та мангальними зонами</p>
+        </div>
+        <div class="about-feature">
+          <div class="dot"></div>
+          <p>Підігріті басейни для дорослих і окремий дитячий — відпочиваєте всією родиною у будь-яку погоду</p>
+        </div>
+        <div class="about-feature">
+          <div class="dot"></div>
+          <p>М'які пуфи на газоні, стіл для настільного тенісу та дитяча зона для розваг без турбот</p>
+        </div>
+        <div class="about-feature">
+          <div class="dot"></div>
+          <p>Охоронювана парковка прямо на території — зручно приїжджати на власному авто</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <span class="section-tag reveal">Послуги</span>
+  <h2 class="section-title reveal">Все для<br><em>ідеального відпочинку</em></h2>
+  <p class="section-lead reveal">Ми подбали про кожну деталь, щоб ваш час тут був незабутнім.</p>
+
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🏡</div>
+      <h3>Оренда альтанок</h3>
+      <p>Три альтанки різного розміру — ідеально для будь-якої компанії. Затишний простір під відкритим небом з усім необхідним.</p>
+      <span class="service-tag">Основна послуга</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏊</div>
+      <h3>Басейни з підігрівом</h3>
+      <p>Два басейни для дорослих (8 і 10 м²) з підігрівом та окремий дитячий (3 м²). Чиста вода та комфортна температура.</p>
+      <span class="service-tag">Популярно</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🔥</div>
+      <h3>Мангальна зона</h3>
+      <p>Обладнані мангали для ваших смаколиків прямо на свіжому повітрі. Атмосфера справжнього відпочинку на природі.</p>
+      <span class="service-tag">Включено</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🧸</div>
+      <h3>Дитяча зона</h3>
+      <p>Безпечний та веселий простір для найменших — щоб дорослі відпочивали, а діти гралися у задоволення.</p>
+      <span class="service-tag">Для сімей</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🏓</div>
+      <h3>Активний відпочинок</h3>
+      <p>М'які пуфи на газоні та стіл для настільного тенісу — для тих, хто любить рух і спілкування.</p>
+      <span class="service-tag">Активно</span>
+    </div>
+    <div class="service-card reveal">
+      <div class="service-icon">🚗</div>
+      <h3>Парковка</h3>
+      <p>Охоронювана парковка на території комплексу. Ваш автомобіль у безпеці, поки ви насолоджуєтеся відпочинком.</p>
+      <span class="service-tag">Безкоштовно</span>
+    </div>
+  </div>
+</section>
+
+<!-- GAZEBOS -->
+<section class="gazebos" id="gazebos">
+  <span class="section-tag reveal">Альтанки</span>
+  <h2 class="section-title reveal">Оберіть свій<br><em>ідеальний простір</em></h2>
+  <p class="section-lead reveal">Три варіанти під будь-який розмір компанії — бронювання лише по телефону.</p>
+
+  <div class="gazebos-grid">
+    <div class="gazebo-card reveal">
+      <div class="gazebo-img gazebo-img-1">
+        🏡
+        <span class="gazebo-capacity">до 10 осіб</span>
+      </div>
+      <div class="gazebo-body">
+        <h3>Мала альтанка</h3>
+        <p>Затишний простір для невеликих компаній та сімейних зустрічей. Камерна атмосфера та все необхідне.</p>
+        <div class="gazebo-feats">
+          <span class="feat-pill">Мангал</span>
+          <span class="feat-pill">Стіл</span>
+          <span class="feat-pill">Лавки</span>
+        </div>
+      </div>
+    </div>
+    <div class="gazebo-card reveal">
+      <div class="gazebo-img gazebo-img-2">
+        🏕️
+        <span class="gazebo-capacity">до 18 осіб</span>
+      </div>
+      <div class="gazebo-body">
+        <h3>Середня альтанка</h3>
+        <p>Ідеально для корпоративів, днів народження та дружніх вечірок середнього розміру. Простора та комфортна.</p>
+        <div class="gazebo-feats">
+          <span class="feat-pill">Мангал</span>
+          <span class="feat-pill">Стіл</span>
+          <span class="feat-pill">Лавки</span>
+          <span class="feat-pill">Доступ до басейну</span>
+        </div>
+      </div>
+    </div>
+    <div class="gazebo-card reveal">
+      <div class="gazebo-img gazebo-img-3">
+        🎪
+        <span class="gazebo-capacity">до 26 осіб</span>
+      </div>
+      <div class="gazebo-body">
+        <h3>Велика альтанка</h3>
+        <p>Простора альтанка для великих святкувань, корпоративів і сімейних урочистостей. Місця вистачить для всіх!</p>
+        <div class="gazebo-feats">
+          <span class="feat-pill">Мангал</span>
+          <span class="feat-pill">Великий стіл</span>
+          <span class="feat-pill">Лавки</span>
+          <span class="feat-pill">Доступ до басейну</span>
+          <span class="feat-pill">Дитяча зона</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 3rem;" class="reveal">
+    <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.9rem;">
+      ✏️ Бронювання альтанок — лише за телефоном. Ціни в актуальних Stories в Instagram.
+    </p>
+    <a href="tel:+380960083838" class="btn-primary">096 008 38 38</a>
+  </div>
+</section>
+
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <span class="section-tag reveal">Ціни</span>
+  <h2 class="section-title reveal">Актуальні ціни<br><em>на оренду альтанок</em></h2>
+  <p class="section-lead reveal">Робочий час: 11:00 — 21:00. Ціна за цілий день. При оренді надаються мангал, шампури, решітка, вугілля 2,5 кг та засіб для розпалювання.</p>
+
+  <div class="pricing-seasons reveal">
+    <div class="season-card">
+      <div class="season-header">
+        <span class="season-icon">🌸</span>
+        <div>
+          <div class="season-dates">01.03.2026 — 30.04.2026</div>
+          <div class="season-label">Весняний сезон</div>
+        </div>
+      </div>
+      <div class="season-rows">
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 10 осіб</span></div>
+          <div class="pr-price">3 800 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 18 осіб</span></div>
+          <div class="pr-price">4 800 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 26 осіб</span></div>
+          <div class="pr-price">5 800 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Приміщення</span><span class="pr-cap">до 14 осіб</span></div>
+          <div class="pr-price">4 800 <span>грн</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="season-card">
+      <div class="season-header">
+        <span class="season-icon">☀️</span>
+        <div>
+          <div class="season-dates">01.05.2026 — 13.09.2026</div>
+          <div class="season-label">Літній сезон</div>
+        </div>
+      </div>
+      <div class="season-rows">
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 10 осіб</span></div>
+          <div class="pr-price">4 500 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 18 осіб</span></div>
+          <div class="pr-price">5 500 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Альтанка</span><span class="pr-cap">до 26 осіб</span></div>
+          <div class="pr-price">6 500 <span>грн</span></div>
+        </div>
+        <div class="price-row">
+          <div><span class="pr-name">Приміщення</span><span class="pr-cap">до 14 осіб</span></div>
+          <div class="pr-price">5 500 <span>грн</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pricing-notes reveal">
+    <div class="pricing-note">
+      <span class="note-icon">👤</span>
+      <p><strong>Додаткова особа</strong>Кожна наступна особа понад вказану кількість — <strong style="color:var(--gold-light)">+200 грн</strong></p>
+    </div>
+    <div class="pricing-note">
+      <span class="note-icon">🍽️</span>
+      <p><strong>Оренда посуду</strong>35 грн/особу (тарілка, виделка, ніж, стакан, чарка, келих). Скатертина — <strong style="color:var(--gold-light)">100 грн/шт</strong></p>
+    </div>
+    <div class="pricing-note">
+      <span class="note-icon">🏊</span>
+      <p><strong>Басейн — безкоштовно</strong>Для гостей альтанок у вільному доступі. Працює в літній період</p>
+    </div>
+    <div class="pricing-note">
+      <span class="note-icon">🎭</span>
+      <p><strong>Розважальна програма</strong>Аніматори та програми — уточнюйте у адміністратора</p>
+    </div>
+    <div class="pricing-note">
+      <span class="note-icon">🚗</span>
+      <p><strong>Паркування</strong>Кількість місць обмежена — будь ласка, враховуйте це при приїзді</p>
+    </div>
+    <div class="pricing-note">
+      <span class="note-icon">🔥</span>
+      <p><strong>Мангал включено</strong>Шампури, решітка, вугілля 2,5 кг та засіб для розпалювання 0,25 л</p>
+    </div>
+  </div>
+
+  <div class="pricing-deposit reveal">
+    <span class="dep-icon">❗</span>
+    <p>Бронювання лише за тел. <strong>096-008-38-38</strong>. Передплата <strong>1 000 грн</strong> (не повертається, але може бути перенесена при скасуванні за 7+ днів наперед)</p>
+  </div>
+</section>
+
+<!-- POOLS -->
+<section class="pools" id="pools">
+  <span class="section-tag reveal">Басейни</span>
+  <h2 class="section-title reveal">Занурення у<br><em>справжній відпочинок</em></h2>
+  <p class="section-lead reveal">Підігріті басейни для дорослих і малюків — відпочивайте комфортно у будь-яку пору року.</p>
+
+  <div class="pools-row">
+    <div class="pool-card reveal">
+      <span class="pool-icon">🌊</span>
+      <span class="pool-size">8 м²</span>
+      <span class="pool-label">Дорослий басейн №1</span>
+      <p>Просторий басейн з підігрівом для дорослих. Комфортна температура та чиста вода гарантовані.</p>
+      <span class="pool-badge">🔥 Підігрів</span>
+    </div>
+    <div class="pool-card reveal">
+      <span class="pool-icon">💧</span>
+      <span class="pool-size">10 м²</span>
+      <span class="pool-label">Дорослий басейн №2</span>
+      <p>Найбільший басейн комплексу — ідеально для активних ігор та розслаблення великої компанії.</p>
+      <span class="pool-badge">🔥 Підігрів</span>
+    </div>
+    <div class="pool-card reveal">
+      <span class="pool-icon">🐠</span>
+      <span class="pool-size">3 м²</span>
+      <span class="pool-label">Дитячий басейн</span>
+      <p>Безпечний дитячий басейн для маленьких гостей. Невелика глибина та постійний нагляд.</p>
+      <span class="pool-badge">👶 Для дітей</span>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="events" id="events">
+  <span class="section-tag reveal">Заходи</span>
+  <h2 class="section-title reveal">Свято, яке<br><em>запам'ятається</em></h2>
+
+  <div class="events-layout">
+    <div class="events-list reveal">
+      <div class="event-item">
+        <div class="event-icon">🎂</div>
+        <div class="event-text">
+          <strong>День народження</strong>
+          <span>Незабутнє свято в природному оточенні</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon">🏢</div>
+        <div class="event-text">
+          <strong>Корпоратив</strong>
+          <span>Тімбілдинг та відпочинок для колег</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon">👨‍👩‍👧‍👦</div>
+        <div class="event-text">
+          <strong>Сімейний відпочинок</strong>
+          <span>Ідеально для всіх поколінь</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon">🥂</div>
+        <div class="event-text">
+          <strong>Дружні зустрічі</strong>
+          <span>Шашлики, ігри та гарний настрій</span>
+        </div>
+      </div>
+      <div class="event-item">
+        <div class="event-icon">🌸</div>
+        <div class="event-text">
+          <strong>Будь-яке свято</strong>
+          <span>Ювілеї, випускні, вечірки</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="events-big-card reveal">
+      <p class="eyebrow">Забронюйте вже сьогодні</p>
+      <h3>Ваш ідеальний день починається тут</h3>
+      <p>
+        У нас можна чудово відсвяткувати будь-яку важливу подію і просто гарно і весело відпочити та провести час з близькими. Ми подбаємо про атмосферу — ви насолоджуєтесь моментом.
+      </p>
+      <a href="tel:+380960083838" class="btn-primary">Зателефонувати</a>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="location" id="location">
+  <span class="section-tag reveal">Як дістатись</span>
+  <h2 class="section-title reveal">Ми у Бортничах,<br><em>Київ</em></h2>
+
+  <div class="location-grid">
+    <div class="location-map-placeholder reveal">
+      <div class="map-icon">📍</div>
+      <p>пров. Запашний, 27б<br>Бортничі, Київ</p>
+      <a href="https://maps.google.com/?q=пров.+Запашний+27б+Бортничі+Київ" target="_blank" rel="noopener">
+        Відкрити в Google Maps
+      </a>
+    </div>
+
+    <div class="location-info reveal">
+      <div class="location-item">
+        <div class="icon">📍</div>
+        <div>
+          <strong>Адреса</strong>
+          <p>Київ, Бортничі<br>пров. Запашний, 27б</p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="icon">📞</div>
+        <div>
+          <strong>Телефон для бронювання</strong>
+          <p><a href="tel:+380960083838">096 008 38 38</a></p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="icon">📸</div>
+        <div>
+          <strong>Instagram</strong>
+          <p><a href="https://www.instagram.com/zapashnuy/" target="_blank" rel="noopener">@zapashnuy</a> — ціни в актуальних Stories</p>
+        </div>
+      </div>
+      <div class="location-item">
+        <div class="icon">🚗</div>
+        <div>
+          <strong>Паркування</strong>
+          <p>Охоронювана парковка на території комплексу — безкоштовно для гостей</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Готові до<br><em>незабутнього відпочинку?</em></h2>
+  <p>Бронювання альтанок — лише за телефоном. Ціни та фото — в Instagram Stories.</p>
+  <div class="cta-actions">
+    <a href="tel:+380960083838" class="btn-primary">096 008 38 38</a>
+    <a href="https://www.instagram.com/zapashnuy/" target="_blank" rel="noopener" class="btn-gold-outline">Instagram @zapashnuy</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">Запашний</span>
+    <p>Комплекс відпочинку у Бортничах, Київ. Альтанки, підігріті басейни та простір для незабутніх свят.</p>
+    <div class="socials">
+      <a href="https://www.instagram.com/zapashnuy/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/zapashnuy/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <h4>Навігація</h4>
+    <ul>
+      <li><a href="#about">Про комплекс</a></li>
+      <li><a href="#services">Послуги</a></li>
+      <li><a href="#gazebos">Альтанки</a></li>
+    <li><a href="#pricing">Ціни</a></li>
+      <li><a href="#pools">Басейни</a></li>
+      <li><a href="#events">Заходи</a></li>
+      <li><a href="#location">Контакти</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <h4>Контакти</h4>
+    <ul>
+      <li><a href="tel:+380960083838">096 008 38 38</a></li>
+      <li><a href="https://www.instagram.com/zapashnuy/" target="_blank" rel="noopener">Instagram @zapashnuy</a></li>
+      <li><a href="#">пров. Запашний, 27б</a></li>
+      <li><a href="#">Бортничі, Київ</a></li>
+    </ul>
+  </div>
+</footer>
+
+<div class="footer-bottom">
+  <span>© 2026 Комплекс відпочинку "Запашний"</span>
+  <span>Бортничі · Київ</span>
+</div>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
